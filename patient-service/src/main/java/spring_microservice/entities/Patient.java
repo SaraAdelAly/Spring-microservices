@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-//@Setter
 public class Patient {
 
     @Id
@@ -46,13 +45,13 @@ public class Patient {
 //        this.email = email;
 //    }
 //
-////    public Integer getId() {
-////        return id;
-////    }
+//    public UUID getId() {
+//        return id;
+//    }
 //
-////    public void setId(Integer id) {
-////        this.id = id;
-////    }
+//    public void setId(UUID id) {
+//        this.id = id;
+//    }
 //
 //    public String getName() {
 //        return name;
