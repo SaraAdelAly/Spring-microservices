@@ -38,7 +38,7 @@ public class PatientService {
     public PatientResponseDto createPatient(PatientRequestDto patientRequestDto){
         if (patientRepo.existsByEmail(patientRequestDto.getEmail())){
             throw new DuplicateException(
-                    "A patient with this email " + "already exists"
+                    "patient with this email " + "already exists"
                             + patientRequestDto.getEmail());
         }
         Patient patient = patientRepo.save(patientRequestMapper.toEntity(patientRequestDto));

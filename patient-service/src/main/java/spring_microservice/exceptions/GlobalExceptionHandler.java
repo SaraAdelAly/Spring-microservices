@@ -84,7 +84,7 @@ public class GlobalExceptionHandler {
 //                .body(errorResponse);
 //
 //    }
-
+    @ExceptionHandler(DuplicateException.class)
     public ResponseEntity<ErrorResponse> handleDuplicatedResource(DuplicateException duplicateException, HttpServletRequest httpServletRequest) {
         log.warn("Duplicate resource: {}", duplicateException.getMessage());
         ErrorResponse errorResponse = ErrorResponse.builder()
