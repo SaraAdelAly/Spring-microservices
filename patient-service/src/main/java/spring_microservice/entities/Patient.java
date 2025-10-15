@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
-//import lombok.*;
 
 @Entity
 @Setter
@@ -35,6 +34,12 @@ public class Patient {
     @NotNull
     private LocalDate registeredDate;
 
+    @PrePersist
+    public void prePersist() {
+        if (registeredDate == null) {
+            this.registeredDate = LocalDate.now();
+        }
+    }
 
 //
 //    public String getEmail() {
