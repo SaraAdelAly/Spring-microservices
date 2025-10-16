@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import spring_microservice.dto.PatientRequestDto;
 import spring_microservice.dto.PatientResponseDto;
+import spring_microservice.dto.validators.CreatePatientValidationGroup;
 import spring_microservice.service.PatientService;
 
 import java.util.List;
@@ -27,22 +28,26 @@ public class PatientController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<PatientResponseDto>> getAllPatients(){
+    public ResponseEntity<List<PatientResponseDto>> getAllPatients() {
         return ResponseEntity.ok(patientService.getAllPatients());
     }
+
     @GetMapping("/patient")
-    public  ResponseEntity<PatientResponseDto> getPatientByEmail (String email){
+    public ResponseEntity<PatientResponseDto> getPatientByEmail(String email) {
         return ResponseEntity.ok(patientService.findByEmail(email));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientResponseDto> updatePatient (@PathVariable UUID id,
-                                                             @RequestBody @Valid PatientRequestDto patientRequestDto ){
-        return ResponseEntity.ok().body(patientService.updatePatient(id,patientRequestDto));
+    public ResponseEntity<PatientResponseDto> updatePatient(@PathVariable UUID id,
+                                                            @RequestBody @Validated({Default.class})
+                                                            PatientRequestDto patientRequestDto) {
+        return ResponseEntity.ok().body(patientService.updatePatient(id, patientRequestDto));
     }
 
     @PostMapping("/addPatient")
-    public ResponseEntity<PatientResponseDto> addPatient(@Valid @RequestBody PatientRequestDto patientRequestDto){
+    public ResponseEntity<PatientResponseDto> addPatient(@Validated({Default.class, CreatePatientValidationGroup.class})
+                                                             @RequestBody
+                                                             PatientRequestDto patientRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patientRequestDto));
     }
 

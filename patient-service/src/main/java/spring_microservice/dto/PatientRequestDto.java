@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import spring_microservice.dto.validators.CreatePatientValidationGroup;
 
 import java.io.Serializable;
 
@@ -21,7 +22,7 @@ public class PatientRequestDto implements Serializable {
     private String address;
     @NotBlank(message = "birth date is required")
     private String dateOfBirth;
-    @NotBlank(message = "Registered date is required")
+    @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registered date is required")
     private String registeredDate;
 
 //    public String getName() {
