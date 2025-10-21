@@ -1,8 +1,11 @@
 package spring_microservice.controller;
 
+//import io.swagger.v3.oas.annotations.Operation;
+//import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/patients")
+@Tag(name = "Patient", description = "Api from managing patients")
 public class PatientController {
 
     private final PatientService patientService;
@@ -28,6 +32,7 @@ public class PatientController {
 
 
     @GetMapping("/all")
+    @Operation(summary = "Get All system patients")
     public ResponseEntity<List<PatientResponseDto>> getAllPatients() {
         return ResponseEntity.ok(patientService.getAllPatients());
     }
@@ -51,5 +56,9 @@ public class PatientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patientRequestDto));
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable UUID id){
+        patientService.deletePatient(id );
+        return ResponseEntity.noContent().build();
+    }
 }

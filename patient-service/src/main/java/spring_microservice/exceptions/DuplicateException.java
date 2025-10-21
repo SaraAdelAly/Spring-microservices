@@ -1,8 +1,10 @@
 package spring_microservice.exceptions;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class DuplicateException extends RuntimeException {
     private String resourceName;
     private String fieldName;

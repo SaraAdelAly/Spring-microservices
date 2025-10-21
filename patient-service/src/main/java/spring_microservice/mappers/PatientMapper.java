@@ -10,10 +10,10 @@ import java.util.UUID;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PatientMapper {
-//    @Mapping(target = "id", expression = "java(stringToUuid(dto.getId()))")
-    @Mapping(source = "dateOfBirth", target = "dateOfBirth")
-    @Mapping(source = "id", target = "id")
-//    @Mapping(target = "dateOfBirth", expression = "java(stringToLocalDate(dto.getDateOfBirth()))")
+    @Mapping(target = "id", expression = "java(stringToUuid(dto.getId()))")
+//    @Mapping(source = "dateOfBirth", target = "dateOfBirth")
+//    @Mapping(source = "id", target = "id")
+    @Mapping(target = "dateOfBirth", expression = "java(stringToLocalDate(dto.getDateOfBirth()))")
     Patient toEntity(PatientResponseDto dto);
 
 
