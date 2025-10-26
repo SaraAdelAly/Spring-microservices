@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files =true;
+option java_package = "billing";
+
+service BillingService{
+    // there is a method in the billing-service which is called
+    // CreateBillingAccount and this method will receive requests
+    // from a given client
+ rpc CreateBillingAccount(BillingRequest) returns (BillingResponse);
+}
+message BillingRequest{
+//    this 1 not a real value it's used in grpc and proto buff code to help with the serialization
+  string patientId = 1;
+  string name = 2;
+  string email = 3;
+}
+message BillingResponse{
+  //    this 1 not a real value it's used in grpc and proto buff code to help with the serialization
+  string accountId = 1;
+  string status = 2;
+}
